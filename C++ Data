@@ -1,0 +1,114 @@
+#include <iostream>
+using namespace std;
+
+struct Student {
+    int id;
+    string name;
+    int age;
+};
+
+int main() {
+    Student s[100];
+    int count = 0;
+    int choice;
+
+    do {
+        cout << "\n===== Student Management System =====";
+        cout << "\n1. Add Student";
+        cout << "\n2. Display Students";
+        cout << "\n3. Search Student";
+        cout << "\n4. Delete Student";
+        cout << "\n5. Exit";
+        cout << "\nEnter your choice: ";
+        cin >> choice;
+
+        // Add Student
+        if(choice == 1) {
+            cout << "\nEnter ID: ";
+            cin >> s[count].id;
+
+            cout << "Enter Name: ";
+            cin >> s[count].name;
+
+            cout << "Enter Age: ";
+            cin >> s[count].age;
+
+            count++;
+            cout << "Student added successfully!\n";
+        }
+
+        // Display Students
+        else if(choice == 2) {
+            if(count == 0) {
+                cout << "\nNo records found!\n";
+            } else {
+                cout << "\n--- Student List ---\n";
+                for(int i = 0; i < count; i++) {
+                    cout << "\nID: " << s[i].id;
+                    cout << "\nName: " << s[i].name;
+                    cout << "\nAge: " << s[i].age << endl;
+                }
+            }
+        }
+
+        // Search Student
+        else if(choice == 3) {
+            int searchId;
+            cout << "\nEnter ID to search: ";
+            cin >> searchId;
+
+            bool found = false;
+
+            for(int i = 0; i < count; i++) {
+                if(s[i].id == searchId) {
+                    cout << "\nStudent Found!";
+                    cout << "\nID: " << s[i].id;
+                    cout << "\nName: " << s[i].name;
+                    cout << "\nAge: " << s[i].age << endl;
+                    found = true;
+                    break;
+                }
+            }
+
+            if(!found) {
+                cout << "\nStudent not found!\n";
+            }
+        }
+
+        // Delete Student
+        else if(choice == 4) {
+            int deleteId;
+            cout << "\nEnter ID to delete: ";
+            cin >> deleteId;
+
+            bool found = false;
+
+            for(int i = 0; i < count; i++) {
+                if(s[i].id == deleteId) {
+                    for(int j = i; j < count - 1; j++) {
+                        s[j] = s[j + 1];
+                    }
+                    count--;
+                    found = true;
+                    cout << "\nStudent deleted successfully!\n";
+                    break;
+                }
+            }
+
+            if(!found) {
+                cout << "\nStudent not found!\n";
+            }
+        }
+
+        else if(choice == 5) {
+            cout << "\nExiting program...\n";
+        }
+
+        else {
+            cout << "\nInvalid choice! Try again.\n";
+        }
+
+    } while(choice != 5);
+
+    return 0;
+}
